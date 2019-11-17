@@ -10,6 +10,7 @@ import shutil
 from os import listdir
 from os.path import isfile, join
 from datetime import datetime
+import numpy as np
 
 def backendlogic(directory):
     folder_name = "C:" + directory
@@ -34,27 +35,27 @@ def backendlogic(directory):
         if i > (len(faces)-2):
             break
         only_once = False
+        if str(faces[i]) != str(np.array([" "])):
+            final_list.append([files[i]])
+            if i != 0:
+                loop_counter+=1
+            
         for z in range(len(faces)):
-            if faces[i] == [" "]:
+            if str(faces[i]) == str(np.array([" "])):
                 break
             if z < i:
                 continue
             if z > (len(faces)-2):
                 break
-            if (not (faces[z+1] == [" "])) and (not(faces[i] == [" "])):
+            if (not (str(faces[z+1]) == str(np.array([" "])))) and (not(str(faces[i]) == str(np.array([" "])))):
                 comparison = face_recognition.compare_faces([faces[i]], faces[z+1])
-            if faces[z+1] == [" "] or faces[i] == [" "]:
+            if str(faces[z+1]) == str(np.array([" "])) or str(faces[i]) == str(np.array([" "])):
                 comparison[0] = False
             if comparison[0] == True:
-                if only_once == False:
-                    final_list.append([files[i]])
-                    only_once = True
                 final_list[loop_counter].append(files[z+1])
-                faces[z+1] = [" "]
-                files[z+1] = [" "]
-        if faces[i] != [" "]:
-            loop_counter+=1
-        faces[i] = [" "]
+                faces[z+1] = (np.array([" "]))
+                files[z+1] = (np.array([" "]))
+        faces[i] = (np.array([" "]))
 
     final_list.sort()
     duplicate = [final_list[i] for i in range(len(final_list)) if i == 0 or final_list[i] != final_list[i-1]]
@@ -66,6 +67,14 @@ def backendlogic(directory):
                 duplicate.pop(x)
                 break
             check = False
+    check = True
+    while(check):
+        for x in range(len(duplicate)):
+            if len(duplicate[x]) == 1:
+                duplicate.pop(x)
+                break
+            check = False   
+    print(duplicate)
     for x in range(len(duplicate)):
         duplicate[x] = list(dict.fromkeys(duplicate[x]))
 

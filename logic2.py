@@ -9,6 +9,7 @@ from PIL import Image
 import shutil
 from os import listdir
 from os.path import isfile, join
+from datetime import datetime
 
 def backendlogic(directory):
     folder_name = "C:" + directory
@@ -69,11 +70,11 @@ def backendlogic(directory):
         duplicate[x] = list(dict.fromkeys(duplicate[x]))
 
     actual_path = folder_name
-    from datetime import datetime
-    date_time = (datetime.now())
+    date_time = datetime.now()
+    date_time = date_time.strftime("%d%m%Y-%H%M%S")
     for s in range(len(duplicate)):
         
-        dir_structure = str(actual_path)+ '\\'+ str(s) + date_time
+        dir_structure = str(actual_path) + str(s) + "_" + date_time
         makedirs(dir_structure)
     
         for image in duplicate[s]:

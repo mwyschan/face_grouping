@@ -71,8 +71,13 @@ def backendlogic(directory):
     actual_path = folder_name
 
     for s in range(len(duplicate)):
+        
         dir_structure = str(actual_path)+ '\\'+str(s)
-        makedirs(dir_structure)
+        try:
+            makedirs(dir_structure)
+        except:
+            pass
     
         for image in duplicate[s]:
+            image = folder_name+image
             shutil.copy(image, dir_structure)

@@ -69,14 +69,12 @@ def backendlogic(directory):
         duplicate[x] = list(dict.fromkeys(duplicate[x]))
 
     actual_path = folder_name
-
+    from datetime import datetime
+    date_time = (datetime.now())
     for s in range(len(duplicate)):
         
-        dir_structure = str(actual_path)+ '\\'+str(s)
-        try:
-            makedirs(dir_structure)
-        except:
-            pass
+        dir_structure = str(actual_path)+ '\\'+ str(s) + date_time
+        makedirs(dir_structure)
     
         for image in duplicate[s]:
             image = folder_name+image

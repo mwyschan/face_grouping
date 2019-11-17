@@ -35,6 +35,11 @@ def fix_folder():
     globalflag = False
     status_bar("Fix completed.", "#3FB8F4")
 
+def rename():
+    rename_window = Toplevel(window)
+    rename_window.geometry("400x300")
+    rename_window.resizable(width=False, height=False)
+    
 
 def create_fileselect():
     global dirVar
@@ -86,7 +91,7 @@ def create_fileselect():
             currentindex = selectedfileindex
     fileselect_window.destroy()
     globalflag = True
-   
+    rename()
 
 def create_about():
     messagebox.showinfo("About", "GUH 2019\n\nVersion 1.0")

@@ -1,2 +1,2 @@
-# guh2019
-face recognition packaged in a python script
+# face_compare
+Facial-recognition-based library management packaged in a python script
